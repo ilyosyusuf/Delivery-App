@@ -58,7 +58,7 @@ Widget build(BuildContext context) {
                 decoration: AllBorder.allBorder(ColorConst.kWhiteColor.withOpacity(0.1)),
                 // height: 50,
                 child: Icon(Icons.arrow_back, color: ColorConst.kWhiteColor,)
-              )
+              ),
             
             ),
             Positioned(
