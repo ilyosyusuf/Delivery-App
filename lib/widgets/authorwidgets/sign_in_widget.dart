@@ -35,127 +35,128 @@ class _SignInWidgetState extends State<SignInWidget> {
           )
         ]
       ),
-      // color: ColorConst.kWhiteColor,
       child: Container(
         width: getWidth(334),
         height: getHeight(333),
         padding: EdgeInsets.all(20.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              TextFormField(
-                controller: _nameController,
-                keyboardType: TextInputType.name,
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(
-                  fillColor: Colors.grey.shade200,
-                  filled: true,
-                  contentPadding: EdgeInsets.all(10.0),
-                  hintText: "Username",
-                  enabledBorder: OutlineInputBorder(
-                    // borderSide: BorderSide(color: Colors.black),
-                    borderRadius: BorderRadius.circular(5.0),
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: _nameController,
+                  keyboardType: TextInputType.name,
+                  textInputAction: TextInputAction.next,
+                  decoration: InputDecoration(
+                    fillColor: Colors.grey.shade200,
+                    filled: true,
+                    contentPadding: EdgeInsets.all(10.0),
+                    hintText: "Username",
+                    enabledBorder: OutlineInputBorder(
+                      // borderSide: BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
+                  validator:(value) {
+                    if (value!.isEmpty) {
+                      return "Please, Fill the line";
+                    }
+                  },
                 ),
-                validator:(value) {
-                  if (value!.isEmpty) {
-                    return "Please, Fill the line";
-                  }
-                },
-              ),
-              SizedBox(height: 20.0),
-              TextFormField(
-                controller: _passwordController,
-                keyboardType: TextInputType.visiblePassword,
-                textInputAction: TextInputAction.done,
-                obscureText: _isShow,
-                decoration: InputDecoration(
-                  fillColor: Colors.grey.shade200,
-                  filled: true,
-                  contentPadding: EdgeInsets.all(10.0),
-                  hintText: "Password",
-                  
-                  suffixIcon: IconButton( icon: Icon(Icons.remove_red_eye),
-                    onPressed: (){
-                      setState(() {
-                        _isShow = !_isShow;
-                      });
-                    },
+                SizedBox(height: 20.0),
+                TextFormField(
+                  controller: _passwordController,
+                  keyboardType: TextInputType.visiblePassword,
+                  textInputAction: TextInputAction.done,
+                  obscureText: _isShow,
+                  decoration: InputDecoration(
+                    fillColor: Colors.grey.shade200,
+                    filled: true,
+                    contentPadding: EdgeInsets.all(10.0),
+                    hintText: "Password",
+                    
+                    suffixIcon: IconButton( icon: Icon(Icons.remove_red_eye),
+                      onPressed: (){
+                        setState(() {
+                          _isShow = !_isShow;
+                        });
+                      },
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
                   ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
+                  validator:(value) {
+                    if (value!.isEmpty) {
+                      return "Please, Fill the line";
+                    }
+                  },
                 ),
-                validator:(value) {
-                  if (value!.isEmpty) {
-                    return "Please, Fill the line";
-                  }
-                },
-              ),
-              SizedBox(height: 20.0),
-              Stack(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    height: 100,
-                    // child: Text("Biror nima"),
-                  ),
-                  Positioned(
-                    left: 10.0,
-                    child: CircleAvatar(
-                      radius: 25.0,
-                      backgroundColor: ColorConst.kPrimaryColor,),
-                  
-                  ),
-                  Positioned(
-                    top: 20.0,
-                    left: 30.0,
-                    child: CircleAvatar(
-                      radius: 25.0,
-                      backgroundColor: ColorConst.kRedColor),
-                  ),
-                  Positioned(
-                    right: 0,
-                    top: 10,
-                    child: InkWell(
-                      child: Container(
-                        child: Text("Forgot password?")
+                SizedBox(height: 20.0),
+                Stack(
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      height: 100,
+                      // child: Text("Biror nima"),
+                    ),
+                    Positioned(
+                      left: 10.0,
+                      child: CircleAvatar(
+                        radius: 25.0,
+                        backgroundColor: ColorConst.kPrimaryColor,),
+                    
+                    ),
+                    Positioned(
+                      top: 20.0,
+                      left: 30.0,
+                      child: CircleAvatar(
+                        radius: 25.0,
+                        backgroundColor: ColorConst.kRedColor),
+                    ),
+                    Positioned(
+                      right: 0,
+                      top: 10,
+                      child: InkWell(
+                        child: Container(
+                          child: Text("Forgot password?")
+                        ),
                       ),
+                    )
+                  ],
+                ),
+                Stack(
+                  children: [
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: ColorConst.kPrimaryColor,
+                        elevation: 0,
+                        fixedSize: Size(350, 40),
+                      ),
+                      child: Text("Login", style: TextStyle(color: ColorConst.kWhiteColor, fontSize: 16.0),),
+                      onPressed: _onPressed,
                     ),
-                  )
-                ],
-              ),
-              Stack(
-                children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: ColorConst.kPrimaryColor,
-                      elevation: 0,
-                      fixedSize: Size(350, 40),
-                    ),
-                    child: Text("Login", style: TextStyle(color: ColorConst.kWhiteColor, fontSize: 16.0),),
-                    onPressed: _onPressed,
-                  ),
-                  Positioned(
-                    right: 10,
-                    top: 18,
-                    child: SvgPicture.asset('assets/icons/arrow.svg')
-                  
-                  )
-                ],
-              )
-            ],
-          )
+                    Positioned(
+                      right: 10,
+                      top: 18,
+                      child: SvgPicture.asset('assets/icons/arrow.svg')
+                    
+                    )
+                  ],
+                )
+              ],
+            )
+          ),
         ),
       ),
     );
@@ -167,7 +168,7 @@ class _SignInWidgetState extends State<SignInWidget> {
     if(_formKey.currentState!.validate()){
       for (User user in UserData.UserList) {
         if(name == user.name && password == user.password){
-          Navigator.push(context, MaterialPageRoute(builder: (ctx)=> MyHomePage()));
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx)=> MyHomePage()));
           return true;
         }
       }

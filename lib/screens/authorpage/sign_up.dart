@@ -1,5 +1,6 @@
 import 'package:exam/core/components/boxdecoration/boxdecoration.dart';
 import 'package:exam/core/constants/colors.dart';
+import 'package:exam/screens/authorpage/sign_in.dart';
 import 'package:exam/widgets/authorwidgets/sign_up_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -37,9 +38,9 @@ Widget build(BuildContext context) {
                 height: 100,
                 decoration: UpBorder.upBorder(ColorConst.kPrimaryColor),
                 child: TextButton(
-                  child: Text("Create new account", style: TextStyle(color: Colors.black),),
+                  child: Text("Already have an account? Log in", style: TextStyle(color: ColorConst.kWhiteColor),),
                   onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (ctx)=> SignUppage()));
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx)=> SignInPage()));
                   },
                 ),
               ),

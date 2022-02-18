@@ -34,3 +34,13 @@ class BottomBorder{
     );
   }
 }
+
+class UpBorderList{
+  static bottomBorder(Color color){
+    return BoxDecoration(
+      color: color,
+      borderRadius: BorderRadius.only(topLeft: Radius.circular(5.0), topRight: Radius.circular(5.0))
+
+    );
+  }
+}

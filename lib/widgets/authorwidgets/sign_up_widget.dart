@@ -2,6 +2,7 @@ import 'package:exam/core/components/sizeconfig/size_config.dart';
 import 'package:exam/core/constants/colors.dart';
 import 'package:exam/core/data/user_data.dart';
 import 'package:exam/models/authormodel/author.dart';
+import 'package:exam/screens/authorpage/sign_in.dart';
 import 'package:exam/screens/homepage/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -190,26 +191,33 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   }
 
   _onPressed() {
-    String name = _nameController.text;
-    String email = _emailController.text;
-    String password = _passwordController.text;
 
+    int id = UserData.UserList.length;
     if (_formKey.currentState!.validate()) {
+      String name = _nameController.text.trim();
+      String email = _emailController.text.trim();
+      String password = _passwordController.text.trim();
+      bool isTrue = true;
       for (User user in UserData.UserList) {
-        if (name == user.name && password == user.password) {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (ctx) => MyHomePage()));
-          return true;
+        if (email == user.email) {
+          isTrue = false;
         }
       }
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          dismissDirection: DismissDirection.horizontal,
-          backgroundColor: Colors.redAccent,
-          content: Text("wrong input, please enter correctly or Sign up first"),
-          behavior: SnackBarBehavior.floating,
-        ),
-      );
+      if (isTrue == true) {
+        UserData.UserList.add(User(id+1, name, email, password));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx)=> SignInPage()));
+      }
+      if(isTrue == false){
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            dismissDirection: DismissDirection.horizontal,
+            backgroundColor: Colors.redAccent,
+            content: Text("This email addres is exist in this site"),
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      }
+
     }
   }
 }

@@ -44,7 +44,7 @@ class _SignInPageState extends State<SignInPage> {
                 child: TextButton(
                   child: Text("Create new account", style: TextStyle(color: Colors.black),),
                   onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (ctx)=> SignUppage()));
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx)=> SignUppage()));
                   },
                 ),
               ),
@@ -85,7 +85,31 @@ class _SignInPageState extends State<SignInPage> {
                 )
               )
             
-            )
+            ),
+            // Positioned(
+            //   child: Container(
+            //     child: Column(
+            //       children: [
+            //         Text("Or"),
+            //         Container(
+            //           width: 200,
+            //           child: Row(
+            //             children: [
+            //               InkWell(
+            //                 child: Container(
+            //                   width: 50,
+            //                   height: 50,
+            //                   child: Image.asset()
+            //                 ),
+            //               )
+            //             ],
+            //           )
+            //         )
+            //       ],
+            //     ),
+            //   )
+            
+            // )
           ],
         ),
       )
