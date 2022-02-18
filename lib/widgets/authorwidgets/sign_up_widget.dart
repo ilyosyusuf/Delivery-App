@@ -13,7 +13,7 @@ class _SignInWidgetState extends State<SignInWidget> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Container(
-      width:
+      width: getWidth(334),
     );
   }
 }
