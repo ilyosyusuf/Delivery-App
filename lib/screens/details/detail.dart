@@ -5,6 +5,8 @@ import 'package:exam/core/constants/fonts.dart';
 import 'package:exam/core/data/food_data.dart';
 import 'package:exam/core/data/user_data.dart';
 import 'package:exam/models/authormodel/food_model.dart';
+import 'package:exam/screens/homepage/home_page.dart';
+import 'package:exam/widgets/foodwidgets/bottom_navigation_bar.dart';
 import 'package:exam/widgets/textwidget/text_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +24,7 @@ class _DetailsPageState extends State<DetailsPage> {
     List _foodSize = ['Small', 'Medium', 'Large'];
     List _foodCount = [0,0,0];
     List _foodSum = [0,0,0];
+    dynamic _mainSum = 0;
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -32,8 +35,62 @@ class _DetailsPageState extends State<DetailsPage> {
       // ),
       body: ListView(
         children: [
-          Container(
-            child: Image.asset(widget.food.image),
+          Stack(
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: 250,
+                child: Image.asset(widget.food.image, fit: BoxFit.cover,),
+              ),
+              Positioned(
+                child: Container(
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  height: 80,
+                  width: MediaQuery.of(context).size.width,
+                  color: ColorConst.kBlack.withOpacity(0.7),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          decoration: AllBorder.allBorder(ColorConst.kBlack.withOpacity(0.7)),
+                          // height: 50,
+                          child: Icon(Icons.arrow_back, color: ColorConst.kPrimaryColor,)
+                        ),
+                        onTap: (){
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx)=>MyHomePage()));
+                        },
+                      ),
+                      TextWidget.textWidget(text: widget.food.foodname, color: ColorConst.kWhiteColor, size: FontSizeConst.kMediumFont),
+                      Container(
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 40,
+                              height: 40,
+                              decoration: AllBorder.allBorder(ColorConst.kBlack.withOpacity(0.7)),
+                              // height: 50,
+                              child: Icon(Icons.favorite, color: ColorConst.kPinkForList,)
+                            ),
+                            SizedBox(width: 10,),
+                            Container(
+                              width: 40,
+                              height: 40,
+                              decoration: AllBorder.allBorder(ColorConst.kBlack.withOpacity(0.7)),
+                              // height: 50,
+                              child: Icon(Icons.more_vert, color: ColorConst.kPrimaryColor,)
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  )
+                )
+              
+              )
+            ],
           ),
           Container(
             margin: EdgeInsets.all(20.0),
@@ -50,20 +107,16 @@ class _DetailsPageState extends State<DetailsPage> {
                       TextWidget.textWidget(text: widget.food.reviews),
                     ],
                   ),
-                  
                 ),
                 OutlinedButton(
                   child: TextWidget.textWidget(text: "Share", size: FontSizeConst.kSmallFont),
                   style: OutlinedButton.styleFrom(fixedSize: Size(47, 22)),
                   onPressed: (){},
                 ),
-
-
               ],
             ),
           ),
           _sizesCont(text1: "Sizes", text2: "Price"),
-
           Container(
             height: 200,
             width: MediaQuery.of(context).size.width,
@@ -105,6 +158,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                   if(_foodCount[i]>0){
                                     _foodCount[i]-=1;
                                     _foodSum[i] -= widget.food.cost[i];
+                                    _mainSum = _mainSum - _foodSum[i];
                                   }
                                 });
                               },
@@ -130,7 +184,9 @@ class _DetailsPageState extends State<DetailsPage> {
                                   if(_foodCount[i]<10){
                                     _foodCount[i]+=1;
                                     _foodSum[i] += widget.food.cost[i];
-                                    print("$sum");
+                                    _mainSum = _mainSum + widget.food.cost[i];
+                                    // print("$sum");
+                                    print(_mainSum);
                                   }
                                 });
                               },
@@ -155,9 +211,40 @@ class _DetailsPageState extends State<DetailsPage> {
                 
               }
             ),
+            
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 100),
+            child:
+              ElevatedButton(
+                
+                child: Text("Order Now"),
+                style: ElevatedButton.styleFrom(primary: ColorConst.kBlack),
+                onPressed: (){
+                  showDialog(context: context, builder: (ctx)=>Container(
+                    
+                    width: 100,
+                    height: 100,
+                    margin: EdgeInsets.only(left: 100, right: 100, top: 300, bottom: 300),
+                    color: ColorConst.kWhiteColor,
+                    
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextWidget.textWidget(text: "Total:"),
+                          TextWidget.textWidget(text: "\$${_mainSum}")
+                        ],
+                      ),
+                    )
+                  ));
+                },
+              )
           )
         ],
       ),
+      bottomNavigationBar: BottomNavigation().bottomNavigation(context),
     );
   }
 

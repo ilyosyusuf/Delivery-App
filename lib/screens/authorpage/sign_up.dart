@@ -3,6 +3,7 @@ import 'package:exam/core/constants/colors.dart';
 import 'package:exam/screens/authorpage/sign_in.dart';
 import 'package:exam/widgets/authorwidgets/sign_up_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SignUppage extends StatefulWidget {
   const SignUppage({ Key? key }) : super(key: key);
@@ -52,12 +53,17 @@ Widget build(BuildContext context) {
             Positioned(
               top: 10,
               left: 23,
-              child: Container(
-                width: 40,
-                height: 40,
-                decoration: AllBorder.allBorder(ColorConst.kWhiteColor.withOpacity(0.1)),
-                // height: 50,
-                child: Icon(Icons.arrow_back, color: ColorConst.kWhiteColor,)
+              child: InkWell(
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  decoration: AllBorder.allBorder(ColorConst.kWhiteColor.withOpacity(0.1)),
+                  // height: 50,
+                  child: Icon(Icons.arrow_back, color: ColorConst.kWhiteColor,)
+                ),
+                onTap: (){
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx)=>SignInPage()));
+                },
               ),
             
             ),

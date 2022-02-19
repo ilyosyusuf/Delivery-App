@@ -9,5 +9,6 @@ class ColorConst{
   static const Color kPinkForList = Color(0XFFFF6060);
   static const Color kAmberForList = Color(0XFFF2A902);
   static const Color kGreenForList = Colors.green;
+  static const Color kBlack = Colors.black;
 
 }

@@ -5,6 +5,7 @@ import 'package:exam/screens/authorpage/sign_up.dart';
 import 'package:exam/widgets/authorwidgets/sign_in_widget.dart';
 import 'package:exam/widgets/authorwidgets/sign_up_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({ Key? key }) : super(key: key);
@@ -44,7 +45,7 @@ class _SignInPageState extends State<SignInPage> {
                 child: TextButton(
                   child: Text("Create new account", style: TextStyle(color: Colors.black),),
                   onPressed: (){
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx)=> SignUppage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (ctx)=> SignUppage()));
                   },
                 ),
               ),
@@ -56,12 +57,17 @@ class _SignInPageState extends State<SignInPage> {
             Positioned(
               top: 10,
               left: 23,
-              child: Container(
-                width: 40,
-                height: 40,
-                decoration: AllBorder.allBorder(ColorConst.kWhiteColor),
-                // height: 50,
-                child: Icon(Icons.arrow_back, color: ColorConst.kPrimaryColor,)
+              child: InkWell(
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  decoration: AllBorder.allBorder(ColorConst.kWhiteColor),
+                  // height: 50,
+                  child: Icon(Icons.arrow_back, color: ColorConst.kPrimaryColor,)
+                ),
+                onTap: (){
+                  SystemNavigator.pop();
+                },
               )
             
             ),

@@ -2,7 +2,10 @@ import 'package:exam/core/components/boxdecoration/boxdecoration.dart';
 import 'package:exam/core/components/sizeconfig/size_config.dart';
 import 'package:exam/core/constants/colors.dart';
 import 'package:exam/core/constants/fonts.dart';
+import 'package:exam/widgets/foodwidgets/bottom_navigation_bar.dart';
 import 'package:exam/widgets/foodwidgets/food_list_horz.dart';
+import 'package:exam/widgets/foodwidgets/food_list_horz_features.dart';
+import 'package:exam/widgets/foodwidgets/food_list_vert.dart';
 import 'package:exam/widgets/textwidget/text_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -135,11 +138,14 @@ class _MyHomePageState extends State<MyHomePage> {
             _viewAll("Promotions"),
             FoodWidget(),
             _viewAll("Features"),
+            FoodWidgetFeature(),
+            FoodListWidget(),
 
 
           ],
         ),
       ),
+      bottomNavigationBar: BottomNavigation().bottomNavigation(context),
     );
   }
 
